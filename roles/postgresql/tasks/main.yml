@@ -1,0 +1,7 @@
+---
+- name: Instalando o PostgreSQL
+  apt:
+    name: postgresql
+    state: latest
+  notify: Restart Postgresql
+...

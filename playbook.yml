@@ -1,0 +1,5 @@
+- name: Implantando e-commerce Hall technology
+  hosts: tp3_lab
+  become: yes
+  roles:
+    - postgresql
