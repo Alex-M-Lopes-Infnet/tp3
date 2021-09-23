@@ -1,0 +1,17 @@
+[Unit]
+Description=gunicon_ecommerce rdaemon
+Requires=gunicon_ecommerce.socket
+After=network.target
+
+[Service]
+User=alex
+Group=www-data
+WorkingDirectory=/halltechnology.com
+ExecStart=/halltechnology.com
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/gunicon_ecommerce.sock \
+          pystore.wsgi:application
+
+[Install]
+WantedBy=multi-user.target

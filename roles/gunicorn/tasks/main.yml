@@ -1,0 +1,23 @@
+---
+- name: Instalando Gunicorn
+  pip:
+    name: gunicorn
+
+- name: Instalando Curl
+  apt:
+    name: curl
+
+- name: Criando o socket
+  copy:
+    src: gunicorn_ecommerce.socket
+    dest: /etc/systemd/system/gunicorn_ecommerce.socket
+
+- name: Criando o service
+  copy:
+    src: gunicorn_ecommerce.service
+    dest: /etc/systemd/system/gunicorn_ecommerce.service
+  notify: Iniciando Gunicorn
+
+- name: Ativando o serviço
+  shell: curl --unix-socket /run/gunicorn_ecommerce.sock localhost
+

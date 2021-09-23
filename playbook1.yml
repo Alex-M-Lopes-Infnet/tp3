@@ -2,4 +2,5 @@
   hosts: tp3_lab
   become: yes
   roles:
+    - common 
     - postgresql

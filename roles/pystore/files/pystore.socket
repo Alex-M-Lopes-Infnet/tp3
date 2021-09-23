@@ -1,0 +1,9 @@
+[Unit]
+Description=pystore socket
+
+[Socket]
+ListenStream=/run/pystore.sock
+
+[Install]
+WantedBy=sockets.target
+

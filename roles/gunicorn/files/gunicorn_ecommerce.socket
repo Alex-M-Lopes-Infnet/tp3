@@ -1,0 +1,8 @@
+[Unit]
+Description=gunicorn ecommerce socket
+
+[Socket]
+ListenStream=/run/gunicorn_ecommerce.sock
+
+[Install]
+WantedBy=sockets.target

@@ -1,0 +1,24 @@
+---
+- name: Instalar o nginx
+  apt:
+    name: nginx
+    state: latest
+
+- name: Copiando o arquivo de configuração da aplicação
+  copy:
+    src: pystore
+    dest: /etc/nginx/sites-available
+
+- name: Criando links Simbolicos
+  shell: ln -s /etc/nginx/sites-available/pystore /etc/nginx/sites-enabled/
+  args:
+    chdir: /etc/nginx/sites-enabled
+  ignore_errors: yes
+
+- name: Removendo arquivo default
+  shell: rm default
+  args:
+    chdir: /etc/nginx/sites-enabled
+  ignore_errors: yes
+  notify: Restart Nginx
+...

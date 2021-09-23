@@ -1,0 +1,6 @@
+- name: Implantando e-commerce Hall technology [2/2]
+  hosts: tp3_lab
+  become: yes
+  roles: 
+    - pystore
+    - nginx

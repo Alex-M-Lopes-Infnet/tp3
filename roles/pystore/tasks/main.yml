@@ -1,0 +1,33 @@
+---
+- name: Intalando git
+  apt:
+    name: git
+    state: latest
+
+- name: Clonando o repositório do projeto
+  ansible.builtin.git:
+    repo: 'https://github.com/Alex-M-Lopes-Infnet/-halltechnology.com-.git'
+    dest: /home/ansible/halltechnology
+
+- name: intalando os requisitos
+  pip:
+    requirements: /home/ansible/halltechnology/requirements.txt
+
+- name: Realizando as migrações do Django
+  shell: python3 /home/ansible/halltechnology/manage.py migrate
+
+- name: Realizando collectstatic
+  shell: python3 /home/ansible/halltechnology/manage.py collectstatic
+
+- name: Cria o serviço 'pystore.service' para iniciar o servidor de aplicação
+  copy:
+    src: pystore.service
+    dest: "/etc/systemd/system/pystore.service"
+
+- name: Cria o socket 'pystore.socket' para iniciar o servidor de aplicação
+  copy:
+    src: pystore.socket
+    dest: "/etc/systemd/system/pystore.socket"
+  notify: Restart Pystore
+
+...

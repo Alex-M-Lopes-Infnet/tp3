@@ -1,7 +1,31 @@
 ---
 - name: Instalando o PostgreSQL
   apt:
-    name: postgresql
+    name: postgresql-12
     state: latest
   notify: Restart Postgresql
+
+- name: Instalando postgresql-contrib
+  apt:
+    name: postgresql-contrib
+    state: latest
+
+- name: Instalando libpq-dev
+  apt:
+    name: libpq-dev
+    state: latest
+
+- name: Instalando python-psycopg2 prerequisito para os modulos do postgres
+  apt:
+    name: python3-psycopg2
+    state: latest
+
+#- name: copy pg_hba.conf so user/pass authentication works in postgres
+#  copy:
+#    src: pg_hba.conf
+#    dest: "/var/lib/postgresql/12/main/pg_hba.conf"
+#    owner: postgres
+#    group: postgres
+#    mode: 0600
+#  notify: Restart Postgresql
 ...

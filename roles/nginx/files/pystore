@@ -1,0 +1,11 @@
+server {
+		listen 80;
+		server_name local.halltechnology.com 192.168.0.19;
+		location = /static/ {
+				root /home/ansible/halltechnology;
+		}
+		location / {
+				include proxy_params;
+				proxy_pass http://unix:/home/ansible/halltechnology/pystore.sock;
+		}
+}
